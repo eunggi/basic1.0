@@ -1,0 +1,45 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+
+    <tag>
+    <name>selTag</name>
+    <tag-class>egovframework.lbc.cmmn.SelTag</tag-class>
+    <body-content>empty</body-content>
+    
+    
+    <attribute>
+    <name>elemCodeId</name>
+    </attribute>
+    
+    <attribute>
+    <name>elemName</name>
+    </attribute>
+    
+    <attribute>
+    <name>elemStyle</name>
+    </attribute>
+    
+    <attribute>
+    <name>elemClass</name>
+    </attribute>
+    
+    <attribute>
+    <name>elemDefaultName</name>
+    </attribute>
+    
+    <attribute>
+    <name>elemDefaultValue</name>
+    </attribute> 
+    
+    <attribute>
+    <name>elemInitSelectCd</name>
+    </attribute> 
+    
+    <attribute>
+    <name>elemExcludeCd</name>
+    </attribute>     
+            
+    
+    </tag>
+</taglib>

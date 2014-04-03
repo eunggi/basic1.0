@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Common">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+		
+	<select id="selTagDAO.getSexCd" resultClass="egovMap">
+		<![CDATA[
+			SELECT CD
+			     , CD_NAME AS CD_NM 
+			 FROM CMM_CODE
+			WHERE CD_TP = 'TP_SEX'
+		]]>
+	</select>
+	
+	
+	<select id="selTagDAO.getAgeCd" resultClass="egovMap">
+		<![CDATA[
+			SELECT CD
+			     , CD_NAME AS CD_NM 
+			 FROM CMM_CODE
+			WHERE CD_TP = 'TP_AGE'
+		]]>
+	</select>
+	
+</sqlMap>

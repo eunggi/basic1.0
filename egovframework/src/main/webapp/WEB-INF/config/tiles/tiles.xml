@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+ 	
+ 	<!-- void tiles구조 -->
+ 	 <definition name="layouts-void-tiles" template="/WEB-INF/jsp/egovframework/example/lbc/layouts/void-layouts.jsp">
+	  <put-attribute name="content"   value="" />
+	 </definition>
+ 	
+ 	 <definition name="/*" extends="layouts-void-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}.jsp" />
+	 </definition>
+	
+	 <definition name="/*/*" extends="layouts-void-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}/{2}.jsp" />
+	 </definition>
+	
+	 <definition name="/*/*/*" extends="layouts-void-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}/{2}/{3}.jsp" />
+	 </definition>    
+	 
+ 	<!--// void tiles구조 -->
+ 	
+ 	
+ 	<!--  기본형식 tiles 구조 -->
+	 <definition name="layouts-tiles" template="/WEB-INF/jsp/egovframework/example/lbc/layouts/default-layouts.jsp">
+	  <put-attribute name="header"    value="/WEB-INF/jsp/egovframework/example/lbc/layouts/default-header.jsp" />
+	  <put-attribute name="content"   value="" />
+	  <put-attribute name="footer"    value="/WEB-INF/jsp/egovframework/example/lbc/layouts/default-footer.jsp" />
+	 </definition>
+	 
+	 <definition name="lbc.main/*" extends="layouts-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}.jsp" />
+	 </definition>
+	
+	 <definition name="lbc.main/*/*" extends="layouts-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}/{2}.jsp" />
+	 </definition>
+	
+	 <definition name="lbc.main/*/*/*" extends="layouts-tiles">
+	  <put-attribute name="content"   value="/WEB-INF/jsp/egovframework/example/{1}/{2}/{3}.jsp" />
+	 </definition>     
+     <!--// 기본형식 tiles 구조 -->
+     
+     
+</tiles-definitions>
