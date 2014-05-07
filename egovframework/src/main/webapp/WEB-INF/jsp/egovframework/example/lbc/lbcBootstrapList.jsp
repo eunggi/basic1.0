@@ -226,19 +226,25 @@
         'legend': {
             names: ['EunJeong','HanSol','InSook','Eom','Pearl','SeungMin','TJ','Taegyu','YongYong'],
             hrefs: [
-                'javascript:columnClick("sss");',
-                'location.href="http://naver.com"'
+                'javascript:columnClick("1");',
+                'location.href="http://naver.com"',
+                'javascript:columnClick("2");',
+                'javascript:columnClick("3");'
+            
             ]
         },
         'dataset': {
-            title: 'Playing time per day',
-            values: [5,7.8,2,4,6,3,5,2,10],
-            colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
+        	title: 'Playing time per day',
+        	values: [
+        		[5,7,2], [2,5,7], [7,2,3], [6,1,5], [5,3,8], [8,3,1], [6,3,9], [6,2,6], [8,2,4]
+        	],
+        	colorset: ['#DC143C', '#FF8C00', "#30a1ce"],
+        	fields: ['Working Time', 'Late count', 'Mail count']
         },
         'chartDiv': 'Nwagon',
-        'chartType': 'column',
+        'chartType': 'multi_column',
         'chartSize': { width: NwagonDivwidth, height: 300 },
-        'maxValue': 10,
+        'maxValue': 30,
         'increment': 2
     };
     Nwagon.chart(options);

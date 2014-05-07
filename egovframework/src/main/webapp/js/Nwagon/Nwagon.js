@@ -777,7 +777,13 @@ var Nwagon = {
                     for(var index = 0; index < one_data.length; index++){
                         var pxx = px+ (index*(cw));
                         ch = one_data[index]/yLimit*height;
-                        drawColGroups(columns, ch, pxx, colors[index], one_data[index], false, 0);
+                       
+                        if(hrefs.length < (i*one_data.length) + index || hrefs[ (i*one_data.length) + index] == undefined){
+                        	 drawColGroups(columns, ch, pxx, colors[index], one_data[index], false, 0);
+                        }else{
+                        	 drawColGroups(columns, ch, pxx, colors[index], one_data[index], false, 0, hrefs[ (i*one_data.length) + index]);
+                        }
+                        
                         chart_data[fields[index]].push('Label ' + names[i] + ', Value  '+ one_data[index]);
                     }
 
@@ -802,7 +808,12 @@ var Nwagon = {
                         px = (colWidth*(i+0.2));// + cw;
                         ch = one_data[index]/yLimit*height;
 
-                        drawColGroups(columns, ch, px, colors[index], one_data[index], true, yValue);
+                        if(hrefs.length < (i*one_data.length) + index || hrefs[ (i*one_data.length) + index] == undefined){
+                            drawColGroups(columns, ch, px, colors[index], one_data[index], true, yValue);
+                        }else{
+                            drawColGroups(columns, ch, px, colors[index], one_data[index], true, yValue,hrefs[ (i*one_data.length) + index]);
+                        }
+                        
                         chart_data[fields[index]].push('Label ' + names[i] + ', Value  '+ one_data[index]);
                         yValue +=ch;
                     }
