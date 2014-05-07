@@ -216,21 +216,18 @@
   		
   	<!-- 챠트 -->	
     <script>
+    function columnClick(obj){
+    	alert(obj);
+    }
+    
 	$(window).load(function() {
 	var NwagonDivwidth = $("#Nwagon").width();
     var options = {
         'legend': {
             names: ['EunJeong','HanSol','InSook','Eom','Pearl','SeungMin','TJ','Taegyu','YongYong'],
             hrefs: [
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com',
-                'http://naver.com'
+                'javascript:columnClick("sss");',
+                'location.href="http://naver.com"'
             ]
         },
         'dataset': {

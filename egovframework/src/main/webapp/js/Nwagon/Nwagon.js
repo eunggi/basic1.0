@@ -664,6 +664,7 @@ var Nwagon = {
         drawColumnForeground: function(parentDiv, parentSVG, legend, dataset, increment, max, width, height, chartType){
 
             var names = legend['names'];
+            var hrefs = legend['hrefs'];
             var numOfCols = names.length;
             var colWidth = (width/numOfCols).toFixed(3);
             var yLimit = (Math.ceil(max/increment)+1) * increment;
@@ -683,8 +684,9 @@ var Nwagon = {
 
             var tooltip = Nwagon.createTooltip();
             foreground.appendChild(tooltip);
+                      
+            var drawColGroups = function(columns, ch, px, color, tooltipText, isStackedColumn, yValue, href){
 
-            var drawColGroups = function(columns, ch, px, color, tooltipText, isStackedColumn, yValue){
                 var colgroup  =  Nwagon.createSvgElem('g', {});
                 columns.appendChild(colgroup);
 
@@ -697,12 +699,15 @@ var Nwagon = {
                     if ( py > 0 ) Nwagon.setAttributes(column, {'y':-py});
                     ch = py;
                 }
-
-             
+                
+                if(href ==undefined){                
+                }else{
+                		Nwagon.setAttributes(column, {'onclick':href});                   	 
+                }
                 
                 column.onmouseover = Nwagon.showToolTip(tooltip, px+cw/2, -ch, tooltipText, 14, 7, 18);
                 column.onmouseout = Nwagon.hideToolTip(tooltip);
-
+           
                 column = null;  //prevent memory leak (in IE) 
             };
 
@@ -739,8 +744,13 @@ var Nwagon = {
                 for(var index = 0; index < data.length; index++){
                     px = (colWidth*(index+0.2));// + cw;
                     ch = data[index]/yLimit*height;
-                    drawColGroups(columns, ch, px, colors[index], data[index]);
-
+                    
+                    if(hrefs.length < index || hrefs[index] == undefined){
+                    	drawColGroups(columns, ch, px, colors[index], data[index]);
+                    }else{
+                    	drawColGroups(columns, ch, px, colors[index], data[index],null,null,hrefs[index]);
+                    }
+                    
                     var text = Nwagon.column.drawLabels(px + cw/2, 15, names[index], false, 0);
                     labels.appendChild(text);
 
