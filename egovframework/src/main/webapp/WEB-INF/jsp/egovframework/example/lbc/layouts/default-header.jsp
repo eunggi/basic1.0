@@ -15,7 +15,9 @@
 	<!-- AXJ -->   
     <link href="<c:url value='/css/axj/default/AXJ.css'/>" rel="stylesheet" media="screen">
 
-       
+    <!--  Nwagon -->
+    <link href="<c:url value='/css/Nwagon/Nwagon.css'/>" rel="stylesheet" media="screen"> 
+    
     <style> 		
 		div#loading{
 		    display: none;

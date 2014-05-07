@@ -46,12 +46,21 @@
 	 * 맵 영역 리사이징 시작
 	   -------------------------------------------------------------------------------------*/
 	function resizeBrowser(){
-		var pWidth =  $mapDiv.parent().closest('div').width();
-		var pHeight = document.documentElement.clientHeight;
-			 
+	//	var pWidth =  $mapDiv.parent().closest('div').width();
+	//	var pHeight = document.documentElement.clientHeight;
+		
+				
+	//	$mapDiv.css('width', parseFloat(pWidth));  
+	//	$mapDiv.css('height', parseFloat(pHeight));  
+		
+		
+		var pWidth =  g_initMapAttr.width;
+		var pHeight = g_initMapAttr.height;
+			
+					
 		$mapDiv.css('width', parseFloat(pWidth));  
 		$mapDiv.css('height', parseFloat(pHeight));  
-				
+		
 		g_map.updateSize();
 	}
 	
@@ -246,6 +255,7 @@
 	
 			g_map.zoomToExtent( bounds );
 			
+			return bounds;
 	}
 	
 	/**-------------------------------------------------------------------------------------

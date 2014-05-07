@@ -5,23 +5,42 @@
 
     <link href="<c:url value='/css/axj/36rollLight/AXGrid.css'/>" rel="stylesheet" media="screen">
     <link href="<c:url value='/css/axj/36rollLight/AXSelect.css'/>" rel="stylesheet" media="screen">
+
+
+     <!-- http://dev.axisj.com/ -->
     <script src="<c:url value='/js/axj/AXGrid.js'/>"></script>
     <script src="<c:url value='/js/axj/AXSelect.js'/>"></script>
     
+    <!-- http://html.nhncorp.com/nwagon -->
+    <script src="<c:url value='/js/Nwagon/Nwagon.js'/>"></script>        
+          
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+       
     <style> 
     .starter-template {
 	  padding: 70px 15px;
 	  text-align: center;
 	}
 	
+	
+       #map2 {
+           width: 400px;
+           height: 300px;
+           border: 1px solid black;
+       }
+
 	</style>
 
 	<script type="text/javascript"> 
+	
+	var op_map, op_layer;
+	var op_layer2;
+	
 	$(window).load(function() {
 		//지도호출
 	   var initMapAttr = {
-			width : $("#map").width(),
-			height : document.documentElement.clientHeight,
+			width : 400,
+			height : 300,
 			initLon : 14135893.887852,
 		    initLat : 4518348.1852606,
 			zoomLv : 8
@@ -30,8 +49,50 @@
 		
 		initPage($("#map_div"),initMapAttr);
 		
+	    op_layer2 = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+         //                                                        "http://192.168.9.36/gisserv/test", {layers: 'B_WG,GU_WG,DO_WGS,HEATMAP',srs: 'EPSG:3857',transparent: true} );
+	    
+	    		  "http://192.168.9.36/mapcache/", {layers: 'test',srs: 'EPSG:3857',transparent: true} );
+	    //		   "http://192.168.9.36/gisserv/test", {layers: 'B_WG,GU_WG,DO_WGS',srs: 'EPSG:3857',transparent: true} );
+	    //	"http://192.168.9.4/tile/tilecache.cgi", {layers: 'TEST',srs: 'EPSG:3857',transparent: true} );
+	    g_map.addLayer(op_layer2);
+	    op_layer2.setVisibility(true);
+	    op_layer2.setOpacity(0.8);
+	    
+	    g_map.events.register("zoomend" , '', reloadLayer2);
+   
+	    
+	  // http://192.168.9.4/tile/tilecache.cgi?LAYERS=TEST&FORMAT=PNG&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&SRS=EPSG:4326&BBOX=124.526368,33.015648,131.874773,38.629528&WIDTH=256&HEIGHT=600
+	    		
+	    
+	    	    
+	    
+	    
+		var bound = g_map.getExtent() ;
+		
+		var L1 = tranceMtoW(bound.left,bound.bottom);
+		var L2 = tranceMtoW(bound.right,bound.top);
+				
+		op_map = new OpenLayers.Map( 'map2' );
+		op_layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+		  //                                                      "http://192.168.9.36/gisserv/test", {layers: 'B_WG,GU_WG,DO_WGS',srs: 'EPSG:4326'} );
+				  "http://192.168.9.36/mapcache/", {layers: 'test',srs: 'EPSG:4326'} );
+
+		
+	 	op_map.addLayer(op_layer);
+	    op_map.addControl(new OpenLayers.Control.LayerSwitcher());
+	    op_map.addControl(new OpenLayers.Control.MousePosition());
+	    op_map.zoomToExtent(new OpenLayers.Bounds(L1.lon,L1.lat,L2.lon,L2.lat));	    
+	    var L3 = tranceMtoW(g_initMapAttr.initLon, g_initMapAttr.initLat);    
+	    op_map.setCenter(new Tmap.LonLat(L3.lon,L3.latt), 8);	  
+		   
+	    
 	});
 	
+	
+	function reloadLayer2(){
+		op_layer2.redraw();
+	}
 	
 	function btnSearchOnClick(){
 	      $().custAjax({
@@ -69,7 +130,7 @@
  	}
 	
 			
-	</script>
+	</script> 
   		
   		
   		
@@ -152,6 +213,42 @@
 	  		
 	</script>
   		
+  		
+  	<!-- 챠트 -->	
+    <script>
+	$(window).load(function() {
+	var NwagonDivwidth = $("#Nwagon").width();
+    var options = {
+        'legend': {
+            names: ['EunJeong','HanSol','InSook','Eom','Pearl','SeungMin','TJ','Taegyu','YongYong'],
+            hrefs: [
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com',
+                'http://naver.com'
+            ]
+        },
+        'dataset': {
+            title: 'Playing time per day',
+            values: [5,7.8,2,4,6,3,5,2,10],
+            colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
+        },
+        'chartDiv': 'Nwagon',
+        'chartType': 'column',
+        'chartSize': { width: NwagonDivwidth, height: 300 },
+        'maxValue': 10,
+        'increment': 2
+    };
+    Nwagon.chart(options);
+	});
+</script>
+
+
   				
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -176,7 +273,7 @@
 
     <div class="starter-template">      
         <div class="row">
-	        <div class="col-lg-5">         	
+	        <div class="col-lg-5" id="ss">         	
 	        
 	         	 <lbc:selTag elemCodeId='SEX_CD' elemName='cbSexCd' elemStyle='width:100px;'  elemClass='select' elemDefaultName='전체' elemDefaultValue='' elemInitSelectCd='1' elemExcludeCd=''/>	
 				 <lbc:selTag elemCodeId='SEX_CD' elemName='cbSexCd' elemStyle='width:100px;'  elemDefaultName='전체' elemDefaultValue='' elemExcludeCd='1'/>
@@ -193,10 +290,15 @@
 				<div id="AXGridTarget"></div>
 				<!-- 그리드 영역 끝 -->	
 		
+		      <!-- 챠트영역 시작 -->
+		       <div id="Nwagon"></div>
+		      <!-- 챠트영역 끝 -->
 		
 	        </div>
 	        <div class="col-lg-7" id="map">
-	           <div id="map_div"></div>	
+	           <div id="map_div"></div>
+	           
+	           <div id="map2"></div>	
 	       </div>      
       </div>
       
