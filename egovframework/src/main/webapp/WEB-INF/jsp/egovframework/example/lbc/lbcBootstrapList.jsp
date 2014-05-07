@@ -273,7 +273,7 @@
 
     <div class="starter-template">      
         <div class="row">
-	        <div class="col-lg-5" id="ss">         	
+	        <div class="col-lg-5">         	
 	        
 	         	 <lbc:selTag elemCodeId='SEX_CD' elemName='cbSexCd' elemStyle='width:100px;'  elemClass='select' elemDefaultName='전체' elemDefaultValue='' elemInitSelectCd='1' elemExcludeCd=''/>	
 				 <lbc:selTag elemCodeId='SEX_CD' elemName='cbSexCd' elemStyle='width:100px;'  elemDefaultName='전체' elemDefaultValue='' elemExcludeCd='1'/>
