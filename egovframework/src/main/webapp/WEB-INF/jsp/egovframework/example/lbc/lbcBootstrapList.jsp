@@ -244,7 +244,7 @@
         'chartDiv': 'Nwagon',
         'chartType': 'multi_column',
         'chartSize': { width: NwagonDivwidth, height: 300 },
-        'maxValue': 30,
+        'maxValue': 15,
         'increment': 2
     };
     Nwagon.chart(options);
